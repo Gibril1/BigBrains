@@ -1,6 +1,6 @@
 import mongoose, { Schema, Types } from "mongoose";
 
-interface IStudent {
+export interface IStudent {
     _id?: Types.ObjectId,
     firstName: string,
     lastName: string,

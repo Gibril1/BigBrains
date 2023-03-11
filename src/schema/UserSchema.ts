@@ -1,8 +1,7 @@
 import { 
     GraphQLObjectType,
     GraphQLID,
-    GraphQLString ,
-    GraphQLSchema
+    GraphQLString 
 } from 'graphql'
 
 // User Type
