@@ -1,6 +1,6 @@
 import mongoose, { Schema, Types } from "mongoose";
 
-interface IAdmin {
+export interface IAdmin {
     firstName: string,
     lastName: string,
     bio: string,

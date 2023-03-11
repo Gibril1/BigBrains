@@ -1,9 +1,10 @@
 const express =  require('express')
 require('dotenv').config()
-const port = process.env.PORT || 500
+const port = process.env.PORT || 5000
 const { graphqlHTTP } = require('express-graphql')
 const connectDB = require('./config/db')
-const UserSchema = require('./schema/UserSchema')
+// const UserSchema = require('./schema/UserSchema')
+const { schema } = require('./queries/UserQueries')
 import 'colorts/lib/string'
 
 // Init app
@@ -16,7 +17,7 @@ connectDB()
 app.use(
     '/auth',
     graphqlHTTP({
-        schema: UserSchema,
+        schema,
         graphiql: process.env.NODE_ENV == 'development'
     })
 )

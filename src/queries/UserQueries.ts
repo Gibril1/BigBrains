@@ -3,7 +3,9 @@ const jwt = require('jsonwebtoken')
 import { 
     GraphQLObjectType,
     GraphQLString,
-    GraphQLNonNull
+    GraphQLNonNull,
+    GraphQLSchema,
+    GraphQLList
 } from 'graphql'
 
 import { 
@@ -15,7 +17,22 @@ const User = require('../models/UserModel')
 const Student = require('../models/StudentModel')
 const Admin = require('../models/AdminModel')
 import { IUser } from '../models/UserModel'
+import { IAdmin } from '../models/AdminModel'
 
+// Root Query
+const RootQuery = new GraphQLObjectType({
+    name: 'RootQueryType',
+    fields:{
+        users: {
+            type: new GraphQLList(UserType),
+            async resolve(parent, args){
+                return await User.find()
+            }
+        }
+    }
+})
+
+// Mutation
 const mutation = new GraphQLObjectType({
     name: 'Mutation',
     fields:{
@@ -42,7 +59,7 @@ const mutation = new GraphQLObjectType({
                 }) as IUser
                 if(user.role === 'student'){
                     const student = await Student.create({
-                        userId : user._id,
+                        userId : user.id,
                         firstName: args.firstName,
                         lastName: args.lastName,
                         bio: args.bio
@@ -50,11 +67,11 @@ const mutation = new GraphQLObjectType({
                     return student
                 }else if(user.role === 'admin'){
                     const admin = await Admin.create({
-                        userId : user._id,
+                        userId : user.id,
                         firstName: args.firstName,
                         lastName: args.lastName,
                         bio: args.bio
-                    })
+                    }) as IAdmin
                     return admin
                 }else {
                     return {
@@ -99,4 +116,13 @@ const mutation = new GraphQLObjectType({
 
 const generateToken = ( id:string ) => {
     return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '30d'})
+}
+
+const schema = new GraphQLSchema({
+    mutation,
+    query: RootQuery
+})
+
+module.exports = {
+    schema
 }

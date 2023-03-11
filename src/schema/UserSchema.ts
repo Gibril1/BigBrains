@@ -1,7 +1,8 @@
 import { 
     GraphQLObjectType,
     GraphQLID,
-    GraphQLString 
+    GraphQLString ,
+    GraphQLSchema
 } from 'graphql'
 
 // User Type
@@ -23,7 +24,8 @@ const LoginType = new GraphQLObjectType({
     name: 'Login',
     fields: () => ({
         email: { type: GraphQLString },
-        password: { type: GraphQLString }
+        password: { type: GraphQLString },
+        token: { type: GraphQLString },
     })
 })
 
