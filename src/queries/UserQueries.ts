@@ -51,6 +51,14 @@ const mutation = new GraphQLObjectType({
             },
             async resolve(parent, args){
                 try {
+
+                    const userExists = await User.findOne({ email: args.email })
+
+                    if(userExists){
+                        return { message: `User with email ${args.email} already exists`}
+                    }
+
+                    // hash password
                     const salt = await bcrypt.genSalt(10)
                     const hashedPassword = await bcrypt.hash(args.password, salt)
 

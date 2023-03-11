@@ -1,11 +1,11 @@
 const express =  require('express')
 require('dotenv').config()
 const port = process.env.PORT || 5000
-const { graphqlHTTP } = require('express-graphql')
 const connectDB = require('./config/db')
-// const UserSchema = require('./schema/UserSchema')
-const { schema } = require('./queries/UserQueries')
+const { errorHandler } = require('./middleware/ErrorMiddleware')
 import 'colorts/lib/string'
+const { protect } = require('../middleware/AuthMiddleware')
+import  authRouter from './routes/AuthRoutes'
 
 // Init app
 const app = express()
@@ -14,13 +14,14 @@ const app = express()
 connectDB()
 
 // Middlewares
-app.use(
-    '/auth',
-    graphqlHTTP({
-        schema,
-        graphiql: process.env.NODE_ENV == 'development'
-    })
-)
+app.use(express.json())
+app.use(express.urlencoded({ extended: true, limit: '50mb' }))
+app.use(errorHandler)
+
+// Routes
+app.use('/api/auth', authRouter)
+
+
 // Listen to server
 app.listen(port, () => {
     console.log(`Server running on port ${port}`.red.underline)
