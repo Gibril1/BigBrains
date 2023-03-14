@@ -16,11 +16,11 @@ const ExamSchema = new Schema<IExam>({
     description: {
         type: String
     },
-    userId: {
-        type: Types.ObjectId,
-        ref: 'Admin',
-        required: true
-    }
+    // userId: {
+    //     type: Types.ObjectId,
+    //     ref: 'Admin',
+    //     required: true
+    // }
 })
 
 module.exports = mongoose.model<IExam>('Exam', ExamSchema)

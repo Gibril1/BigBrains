@@ -143,11 +143,15 @@ const generateToken = ( id:string ) => {
     return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '30d'})
 }
 
-const schema = new GraphQLSchema({
+const UserSchema = new GraphQLSchema({
     mutation,
     query: RootQuery
 })
 
 module.exports = {
-    schema
+    UserSchema
+}
+
+export {
+    
 }
