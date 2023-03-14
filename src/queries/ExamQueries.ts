@@ -1,6 +1,10 @@
 import {
     GraphQLObjectType,
-    GraphQLList
+    GraphQLList,
+    GraphQLSchema,
+    GraphQLNonNull,
+    GraphQLString,
+    GraphQLID
 } from 'graphql'
 
 import {
@@ -22,3 +26,16 @@ const RootQuery = new GraphQLObjectType({
     }
 
 })
+
+
+
+            
+
+
+
+const schema = new GraphQLSchema({
+    query: RootQuery,
+    
+})
+
+module.exports = schema
