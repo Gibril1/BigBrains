@@ -60,7 +60,7 @@ const Mutation = new GraphQLObjectType({
             type: ExamType,
             args:{
                 id: { type:  new GraphQLNonNull(GraphQLID)},
-                name:{ type: new GraphQLNonNull(GraphQLString)  },
+                name:{ type: GraphQLString  },
                 description:{ type: GraphQLString },
                 // userId: { type:  new GraphQLNonNull(GraphQLID)}
             },

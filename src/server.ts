@@ -4,7 +4,8 @@ const port = process.env.PORT || 5000
 const connectDB = require('./config/db')
 const { errorHandler } = require('./middleware/ErrorMiddleware')
 const { authRouter } = require('./routes/AuthRoutes')
-const { examRouter } = require('./routes/ExamRoute')
+const { examRouter } = require('./routes/ExamRoutes')
+const { QARouter } = require('./routes/QARoutes')
 
 // Init app
 const app = express()
@@ -21,6 +22,7 @@ app.use(errorHandler)
 // Routes
 app.use('/api/auth', authRouter)
 app.use('/api/exam', examRouter)
+app.use('/api/qa', QARouter)
 
 
 // Listen to server
