@@ -6,6 +6,7 @@ const { errorHandler } = require('./middleware/ErrorMiddleware')
 const { authRouter } = require('./routes/AuthRoutes')
 const { examRouter } = require('./routes/ExamRoutes')
 const { QARouter } = require('./routes/QARoutes')
+const { protect } = require('./middleware/AuthMiddleware')
 
 // Init app
 const app = express()
@@ -21,8 +22,8 @@ app.use(errorHandler)
 
 // Routes
 app.use('/api/auth', authRouter)
-app.use('/api/exam', examRouter)
-app.use('/api/qa', QARouter)
+app.use('/api/exam', protect, examRouter)
+app.use('/api/qa', protect, QARouter)
 
 
 // Listen to server

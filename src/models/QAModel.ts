@@ -18,35 +18,30 @@ const QASchema = new Schema({
         ref: 'Exam',
         required: true
     },
-    // userId: {
-    //     type: Types.ObjectId,
-    //     ref: 'Admin',
-    //     required: true
-    // },
+    userId: {
+        type: Types.ObjectId,
+        ref: 'Admin',
+        required: true
+    },
     question:{
         type: String,
         required: true
     },
     optionOne:{
         type: String,
-        required: true
     },
     optionTwo:{
         type: String,
-        required: true
     },
     optionThree:{
         type: String,
-        required: true
     },
     optionFour:{
         type: String,
-        required: true
     },
     correctAnswer: {
         type: Number,
         enum: [1, 2, 3, 4],
-        required: true
     }
 })
 
