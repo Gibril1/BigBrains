@@ -9,10 +9,10 @@ export interface IQA {
     optionTwo: string,
     optionThree: string,
     optionFour: string,
-    correctAnswer: string,
+    correctAnswer: number,
 }
 
-const QASchema = new Schema({
+const QASchema = new Schema<IQA>({
     examId:{
         type: Types.ObjectId,
         ref: 'Exam',
